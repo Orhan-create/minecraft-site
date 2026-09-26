@@ -1,0 +1,316 @@
+:root {
+    --bg-dark: #0a0a0f;
+    --bg-card: #12131c;
+    --bg-card-hover: #181a26;
+    --border-color: #232538;
+    --accent-purple: #8b5cf6;
+    --accent-blue: #3b82f6;
+    --gradient-glow: linear-gradient(135deg, #8b5cf6 0%, #3b82f6 100%);
+    --text-primary: #f3f4f6;
+    --text-secondary: #9ca3af;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-primary);
+    line-height: 1.6;
+    overflow-x: hidden;
+}
+
+/* Header & Nav */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 60px;
+    background-color: rgba(10, 10, 15, 0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid var(--border-color);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo {
+    display: flex;
+    flex-direction: column;
+    font-weight: 800;
+    line-height: 1;
+}
+
+.logo-main {
+    font-size: 1.6rem;
+    background: var(--gradient-glow);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    letter-spacing: -0.5px;
+}
+
+.logo-sub {
+    font-size: 0.65rem;
+    color: var(--text-secondary);
+    letter-spacing: 4px;
+    margin-top: 2px;
+}
+
+nav a {
+    color: var(--text-secondary);
+    text-decoration: none;
+    margin-left: 28px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+}
+
+nav a:hover, nav a.active {
+    color: #ffffff;
+    text-shadow: 0 0 10px rgba(139, 92, 246, 0.5);
+}
+
+/* Hero Section */
+.hero {
+    position: relative;
+    text-align: center;
+    padding: 140px 20px;
+    background: linear-gradient(180deg, rgba(10, 10, 15, 0.4) 0%, var(--bg-dark) 100%),
+                url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?q=80&w=1920&auto=format&fit=crop') center/cover no-repeat;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.hero h1 {
+    font-size: 3.5rem;
+    font-weight: 800;
+    margin-bottom: 18px;
+    letter-spacing: -1px;
+    text-shadow: 0 4px 20px rgba(0,0,0,0.8);
+}
+
+.hero p {
+    font-size: 1.25rem;
+    color: var(--text-secondary);
+    max-width: 600px;
+    margin: 0 auto 35px auto;
+}
+
+/* Modern Glowing Button */
+.btn-glow {
+    display: inline-block;
+    padding: 14px 38px;
+    background: var(--gradient-glow);
+    color: #ffffff;
+    font-weight: 700;
+    font-size: 1rem;
+    border-radius: 50px;
+    text-decoration: none;
+    box-shadow: 0 0 25px rgba(139, 92, 246, 0.45);
+    transition: all 0.3s ease;
+}
+
+.btn-glow:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 40px rgba(59, 130, 246, 0.7);
+}
+
+/* Content Section */
+.content-section {
+    padding: 90px 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section-header {
+    margin-bottom: 50px;
+    text-align: center;
+}
+
+.section-header h2 {
+    font-size: 2.2rem;
+    font-weight: 700;
+}
+
+.section-header p {
+    color: var(--text-secondary);
+    margin-top: 6px;
+}
+
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 30px;
+}
+
+.card {
+    background-color: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(139, 92, 246, 0.5);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+}
+
+.card-image-placeholder {
+    height: 180px;
+    position: relative;
+    padding: 15px;
+}
+
+.pack-1 {
+    background: linear-gradient(135deg, #1e1b4b 0%, #311042 100%);
+}
+
+.pack-2 {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+}
+
+.badge {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+}
+
+.badge-purple {
+    background-color: rgba(139, 92, 246, 0.2);
+    color: var(--accent-purple);
+    border: 1px solid rgba(139, 92, 246, 0.4);
+}
+
+.badge-blue {
+    background-color: rgba(59, 130, 246, 0.2);
+    color: var(--accent-blue);
+    border: 1px solid rgba(59, 130, 246, 0.4);
+}
+
+.card-body {
+    padding: 25px;
+}
+
+.card-body h3 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+}
+
+.card-body p {
+    color: var(--text-secondary);
+    font-size: 0.95rem;
+    margin-bottom: 20px;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid var(--border-color);
+    padding-top: 15px;
+}
+
+.tag {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+}
+
+.btn-card {
+    color: var(--accent-purple);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 0.9rem;
+}
+
+footer {
+    text-align: center;
+    padding: 40px;
+    border-top: 1px solid var(--border-color);
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+}
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VoidCraft Atölye | Ücretsiz Minecraft İçerikleri</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <span class="logo-main">VoidCraft</span>
+            <span class="logo-sub">ATÖLYE</span>
+        </div>
+        <nav>
+            <a href="#" class="active">Ana Sayfa</a>
+            <a href="#icerikler">Texture Pack & Modlar</a>
+            <a href="#iletisim">İletişim</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-content">
+                <h1>Minecraft Dünyanı Değiştir</h1>
+                <p>Tamamen ücretsiz, özenle hazırlanmış texture packler ve modlar seni bekliyor.</p>
+                <a href="#icerikler" class="btn-glow">İçerikleri Keşfet</a>
+            </div>
+        </section>
+
+        <section id="icerikler" class="content-section">
+            <div class="section-header">
+                <h2>Öne Çıkan İçerikler</h2>
+                <p>En son hazırladığımız paketler ve eklentiler</p>
+            </div>
+
+            <div class="card-grid">
+                <!-- Kart 1 -->
+                <div class="card">
+                    <div class="card-image-placeholder pack-1">
+                        <span class="badge badge-purple">Yeni</span>
+                    </div>
+                    <div class="card-body">
+                        <h3>Parlayan Elmas Zırh</h3>
+                        <p>Elmas zırhlara özel karanlıkta parlayan neon detaylar ve yenilenmiş dokular ekler.</p>
+                        <div class="card-footer">
+                            <span class="tag">Texture Pack</span>
+                            <a href="#" class="btn-card">Çok Yakında</a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Kart 2 -->
+                <div class="card">
+                    <div class="card-image-placeholder pack-2">
+                        <span class="badge badge-blue">Geliştiriliyor</span>
+                    </div>
+                    <div class="card-body">
+                        <h3>Karanlık Madenler Modu</h3>
+                        <p>Madenlerde daha derin atmosfer, yeni işlevsel bloklar ve gizemli ses efektleri.</p>
+                        <div class="card-footer">
+                            <span class="tag">Mod</span>
+                            <a href="#" class="btn-card">Çok Yakında</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 - Tüm hakları saklıdır. <strong>VoidCraft Atölye</strong></p>
+    </footer>
+</body>
+</html>
