@@ -3,150 +3,547 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VoidCraft Atölye - Minecraft İçerik Platformu</title>
-    <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <title>VOİDCRAFT - Bedwars Doku Paketleri</title>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        /* --- GENEL SİTE VE RTX SHADER ARKA PLAN --- */
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            /* RTX Yağmurlu Orman ve Parlayan Ay Temalı Arka Plan */
+            background: linear-gradient(180deg, rgba(8, 10, 24, 0.75) 0%, rgba(5, 6, 15, 0.92) 100%),
+                        url('https://images.unsplash.com/photo-1511497584788-876761c119ef?q=80&w=1920&auto=format&fit=crop') center/cover fixed no-repeat;
+            color: #f1f5f9;
+            min-height: 100vh;
+        }
+
+        .container { max-width: 1280px; margin: 0 auto; padding: 0 20px; }
+
+        /* --- NAVBAR & BÜYÜK VOİDCRAFT LOGOSU --- */
+        .navbar {
+            background: rgba(10, 12, 26, 0.85);
+            backdrop-filter: blur(15px);
+            border-bottom: 1px solid rgba(168, 85, 247, 0.25);
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        /* İstediğin Büyük Fontlu VOİDCRAFT Logosu */
+        .logo {
+            font-weight: 900;
+            font-size: 2.4rem;
+            letter-spacing: 3px;
+            text-decoration: none;
+            background: linear-gradient(135deg, #ffffff 20%, #c084fc 60%, #6366f1 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 0 15px rgba(168, 85, 247, 0.6));
+        }
+
+        .nav-links { display: flex; gap: 25px; }
+        .nav-links a { color: #cbd5e1; text-decoration: none; font-weight: 600; font-size: 1rem; transition: color 0.2s; }
+        .nav-links a:hover { color: #c084fc; }
+
+        /* --- HERO --- */
+        .hero {
+            text-align: center;
+            padding: 60px 20px 30px;
+        }
+
+        .hero h1 { font-size: 3rem; font-weight: 800; margin-bottom: 12px; }
+        .hero h1 span {
+            background: linear-gradient(135deg, #c084fc 0%, #3b82f6 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero p { color: #94a3b8; font-size: 1.1rem; max-width: 650px; margin: 0 auto 20px; }
+
+        /* --- KART IZGARASI --- */
+        .section-title {
+            font-size: 1.8rem;
+            margin: 30px 0 25px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .section-title::before {
+            content: '';
+            width: 6px;
+            height: 28px;
+            background: #a855f7;
+            border-radius: 4px;
+            box-shadow: 0 0 12px #a855f7;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+            padding-bottom: 60px;
+        }
+
+        /* --- YENİ KART YAPISI (Önce Fotoğraf, Altında İsim ve Bilgiler) --- */
+        .card {
+            background: rgba(15, 17, 35, 0.8);
+            backdrop-filter: blur(10px);
+            border-radius: 16px;
+            border: 1px solid rgba(168, 85, 247, 0.2);
+            overflow: hidden;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            border-color: rgba(192, 132, 252, 0.6);
+            box-shadow: 0 12px 30px -8px rgba(168, 85, 247, 0.4);
+        }
+
+        /* 1. SIRADA: KAPAK FOTOĞRAFI */
+        .card-img-container {
+            position: relative;
+            width: 100%;
+            height: 180px;
+            overflow: hidden;
+        }
+
+        .card-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .card:hover .card-img { transform: scale(1.06); }
+
+        .card-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: rgba(10, 11, 22, 0.85);
+            backdrop-filter: blur(6px);
+            color: #c084fc;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            border: 1px solid rgba(192, 132, 252, 0.3);
+        }
+
+        /* 2. SIRADA: İSİM VE BİLGİLER */
+        .card-content {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        /* Paketin İsmi Fotoğrafın Tam Altında */
+        .card h3 { 
+            font-size: 1.3rem; 
+            color: #fff; 
+            margin-bottom: 8px; 
+            font-weight: 800; 
+        }
+
+        .card p { 
+            color: #94a3b8; 
+            font-size: 0.88rem; 
+            line-height: 1.5; 
+            margin-bottom: 20px; 
+            flex-grow: 1; 
+        }
+
+        .card-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.08);
+            padding-top: 15px;
+        }
+
+        .rating { color: #fbbf24; font-weight: 700; font-size: 0.9rem; }
+
+        /* BUTON */
+        .btn-glow {
+            background: linear-gradient(135deg, #a855f7 0%, #6366f1 100%);
+            color: #fff;
+            padding: 10px 18px;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.88rem;
+            text-decoration: none;
+            box-shadow: 0 4px 15px rgba(168, 85, 247, 0.35);
+            transition: all 0.25s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-glow:hover {
+            background: linear-gradient(135deg, #c084fc 0%, #4f46e5 100%);
+            box-shadow: 0 6px 20px rgba(168, 85, 247, 0.6);
+            transform: translateY(-2px);
+        }
+
+        /* --- DETAY MODALI (BİLGİLER VE OYUN İÇİ FOTOĞRAFLARI) --- */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0; top: 0;
+            width: 100%; height: 100%;
+            background: rgba(5, 6, 15, 0.85);
+            backdrop-filter: blur(12px);
+            overflow-y: auto;
+            padding: 40px 20px;
+        }
+
+        .modal-content {
+            background: #0d0f22;
+            border: 1px solid rgba(168, 85, 247, 0.35);
+            max-width: 950px;
+            margin: 0 auto;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8);
+        }
+
+        .close-btn {
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            color: #94a3b8;
+            font-size: 32px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.2s;
+            z-index: 10;
+        }
+
+        .close-btn:hover { color: #fff; }
+
+        .modal-header {
+            padding: 35px;
+            background: rgba(20, 22, 48, 0.7);
+            border-bottom: 1px solid rgba(147, 51, 234, 0.2);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .modal-body {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            padding: 35px;
+        }
+
+        @media (max-width: 768px) {
+            .modal-body { grid-template-columns: 1fr; }
+        }
+
+        /* Oyun İçi Ekran Görüntüleri */
+        .gallery-title { font-size: 1rem; color: #c084fc; margin-bottom: 10px; font-weight: 700; }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 12px;
+            margin-bottom: 25px;
+        }
+
+        .gallery-grid img {
+            width: 100%;
+            height: 130px;
+            object-fit: cover;
+            border-radius: 10px;
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            transition: transform 0.2s;
+        }
+
+        .gallery-grid img:hover { transform: scale(1.03); border-color: #a855f7; }
+
+        .info-box {
+            background: rgba(20, 22, 48, 0.5);
+            border: 1px solid rgba(147, 51, 234, 0.2);
+            border-radius: 14px;
+            padding: 20px;
+            margin-bottom: 20px;
+        }
+
+        .info-box h4 { color: #c084fc; margin-bottom: 12px; font-size: 1rem; border-bottom: 1px solid rgba(255,255,255,0.08); padding-bottom: 8px; }
+
+        .info-list { list-style: none; }
+        .info-list li { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.05); font-size: 0.88rem; color: #cbd5e1; }
+        .info-list li span { color: #94a3b8; }
+
+        footer { text-align: center; padding: 40px; color: #64748b; font-size: 0.9rem; border-top: 1px solid rgba(255, 255, 255, 0.05); }
+    </style>
 </head>
 <body>
+
+    <!-- NAVBAR -->
     <nav class="navbar">
-        <div class="logo">VOID<span>CRAFT</span></div>
+        <a href="#" class="logo">VOİDCRAFT</a>
         <div class="nav-links">
             <a href="#">Ana Sayfa</a>
-            <a href="#content">Doku Paketleri</a>
-            <a href="#">Modlar</a>
-            <a href="#">Haritalar</a>
+            <a href="#packs">Doku Paketleri</a>
+            <a href="#">Topluluk</a>
         </div>
-        <button class="btn btn-primary">Giriş Yap</button>
+        <a href="#packs" class="btn-glow">Keşfet</a>
     </nav>
 
-    <header class="hero">
-        <h1>Minecraft Dünyanı <span>Efsanevi</span> Hale Getir</h1>
-        <p>En kaliteli Bedwars doku paketleri, modlar ve özel haritalar tek bir çatı altında. Hemen keşfetmeye başla!</p>
-        <div class="hero-buttons">
-            <a href="#content" class="btn btn-primary btn-glow">Paketleri Keşfet</a>
-            <a href="#" class="btn btn-secondary">İçerik Yükle</a>
-        </div>
+    <!-- HERO HEADER -->
+    <header class="hero container">
+        <h1>Minecraft Arenasında <span>Öne Geç</span></h1>
+        <p>Yüksek FPS veren, görüşü kapatmayan kısa kılıçlı ve özel temalı 10 popüler Bedwars doku paketi.</p>
     </header>
 
-    <main id="content" class="container">
+    <!-- 10 DOKU PAKETİ KARTLARI -->
+    <main id="packs" class="container">
         <h2 class="section-title">En İyi Bedwars Doku Paketleri</h2>
         <div class="grid">
 
-            <!-- Kart 1 -->
+            <!-- KART 1: AMETHYST -->
             <div class="card">
-                <div class="card-badge">Bedwars 32x</div>
-                <h3>Amethyst 32x</h3>
-                <p>Mor temalı, kısa kılıçlı ve yüksek FPS garantili efsanevi Bedwars doku paketi.</p>
-                <div class="card-footer">
-                    <span>★ 5.0</span>
-                    <a href="#" class="btn-sm">İndir</a>
+                <div class="card-img-container">
+                    <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600&auto=format&fit=crop" class="card-img" alt="Amethyst 32x">
+                    <span class="card-badge">Bedwars 32x</span>
+                </div>
+                <div class="card-content">
+                    <h3>Amethyst 32x</h3>
+                    <p>Mor kristal temalı, kısa kılıçlı ve yüksek FPS garantili efsanevi Bedwars paketi.</p>
+                    <div class="card-footer">
+                        <span class="rating">★ 5.0</span>
+                        <button onclick="openModal('amethystModal')" class="btn-glow">İncele & İndir ⚡</button>
+                    </div>
                 </div>
             </div>
 
-            <!-- Kart 2 -->
+            <!-- KART 2: PURPLED -->
             <div class="card">
-                <div class="card-badge">Bedwars 16x</div>
-                <h3>Purpled 16x</h3>
-                <p>Ünlü yayıncı Purpled özel paketi. Sade, akıcı ve maksimum PvP performansı.</p>
-                <div class="card-footer">
-                    <span>★ 4.9</span>
-                    <a href="#" class="btn-sm">İndir</a>
+                <div class="card-img-container">
+                    <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=600&auto=format&fit=crop" class="card-img" alt="Purpled 16x">
+                    <span class="card-badge">Bedwars 16x</span>
+                </div>
+                <div class="card-content">
+                    <h3>Purpled 16x</h3>
+                    <p>Ünlü yayıncı Purpled özel paketi. Sade, akıcı ve maksimum PvP performansı.</p>
+                    <div class="card-footer">
+                        <span class="rating">★ 4.9</span>
+                        <button onclick="openModal('amethystModal')" class="btn-glow">İncele & İndir ⚡</button>
+                    </div>
                 </div>
             </div>
 
-            <!-- Kart 3 -->
+            <!-- KART 3: TIMEFALL -->
             <div class="card">
-                <div class="card-badge">Bedwars 16x</div>
-                <h3>Timefall 16x</h3>
-                <p>Dinlendirici gece gökyüzü, net yatak kaplamaları ve göz yormayan koyu mavi renkler.</p>
-                <div class="card-footer">
-                    <span>★ 4.8</span>
-                    <a href="#" class="btn-sm">İndir</a>
+                <div class="card-img-container">
+                    <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=600&auto=format&fit=crop" class="card-img" alt="Timefall 16x">
+                    <span class="card-badge">Bedwars 16x</span>
+                </div>
+                <div class="card-content">
+                    <h3>Timefall 16x</h3>
+                    <p>Dinlendirici gece gökyüzü, net yatak kaplamaları ve göz yormayan koyu mavi renkler.</p>
+                    <div class="card-footer">
+                        <span class="rating">★ 4.8</span>
+                        <button onclick="openModal('amethystModal')" class="btn-glow">İncele & İndir ⚡</button>
+                    </div>
                 </div>
             </div>
 
-            <!-- Kart 4 -->
+            <!-- KART 4: NEBULA -->
             <div class="card">
-                <div class="card-badge">Bedwars 32x</div>
-                <h3>Nebula 32x</h3>
-                <p>Galaksi temalı keskin kılıçlar, özel partikül efektleri ve canlı blok renkleri.</p>
-                <div class="card-footer">
-                    <span>★ 4.9</span>
-                    <a href="#" class="btn-sm">İndir</a>
+                <div class="card-img-container">
+                    <img src="https://images.unsplash.com/photo-1506703719100-a0f3a48c0f86?w=600&auto=format&fit=crop" class="card-img" alt="Nebula 32x">
+                    <span class="card-badge">Bedwars 32x</span>
+                </div>
+                <div class="card-content">
+                    <h3>Nebula 32x</h3>
+                    <p>Galaksi temalı keskin kılıçlar, özel partikül efektleri ve canlı blok renkleri.</p>
+                    <div class="card-footer">
+                        <span class="rating">★ 4.9</span>
+                        <button onclick="openModal('amethystModal')" class="btn-glow">İncele & İndir ⚡</button>
+                    </div>
                 </div>
             </div>
 
-            <!-- Kart 5 -->
+            <!-- KART 5: SAMMYSPOKE -->
             <div class="card">
-                <div class="card-badge">Default Edit</div>
-                <h3>SammySpoke 16x</h3>
-                <p>Orijinal Minecraft görünümünü bozmadan kılıçları kısaltan ve FPS artıran sade paket.</p>
-                <div class="card-footer">
-                    <span>★ 4.7</span>
-                    <a href="#" class="btn-sm">İndir</a>
+                <div class="card-img-container">
+                    <img src="https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=600&auto=format&fit=crop" class="card-img" alt="SammySpoke">
+                    <span class="card-badge">Default Edit</span>
+                </div>
+                <div class="card-content">
+                    <h3>SammySpoke 16x</h3>
+                    <p>Klasik Minecraft görünümünü bozmadan kılıçları kısaltan ve FPS artıran sade paket.</p>
+                    <div class="card-footer">
+                        <span class="rating">★ 4.7</span>
+                        <button onclick="openModal('amethystModal')" class="btn-glow">İncele & İndir ⚡</button>
+                    </div>
                 </div>
             </div>
 
-            <!-- Kart 6 -->
+            <!-- KART 6: WAR 16x -->
             <div class="card">
-                <div class="card-badge">FPS Boost</div>
-                <h3>War 16x</h3>
-                <p>Düşük sistemler için devasa FPS artışı, belirgin cevherler ve temiz nişangah.</p>
-                <div class="card-footer">
-                    <span>★ 4.8</span>
-                    <a href="#" class="btn-sm">İndir</a>
+                <div class="card-img-container">
+                    <img src="https://images.unsplash.com/photo-1542751371-adc38448a05e?w=600&auto=format&fit=crop" class="card-img" alt="War 16x">
+                    <span class="card-badge">FPS Boost</span>
+                </div>
+                <div class="card-content">
+                    <h3>War 16x</h3>
+                    <p>Düşük sistemler için devasa FPS artışı, belirgin cevherler ve temiz nişangah.</p>
+                    <div class="card-footer">
+                        <span class="rating">★ 4.8</span>
+                        <button onclick="openModal('amethystModal')" class="btn-glow">İncele & İndir ⚡</button>
+                    </div>
                 </div>
             </div>
 
-            <!-- Kart 7 -->
+            <!-- KART 7: VANE 16x -->
             <div class="card">
-                <div class="card-badge">Cyber Neon</div>
-                <h3>Vane 16x</h3>
-                <p>Keskin hatlara sahip kılıçlar, neon detaylı araçlar ve hızlı blok koyma görünümü.</p>
-                <div class="card-footer">
-                    <span>★ 4.9</span>
-                    <a href="#" class="btn-sm">İndir</a>
+                <div class="card-img-container">
+                    <img src="https://images.unsplash.com/photo-1563089145-599997674d42?w=600&auto=format&fit=crop" class="card-img" alt="Vane 16x">
+                    <span class="card-badge">Cyber Neon</span>
+                </div>
+                <div class="card-content">
+                    <h3>Vane 16x</h3>
+                    <p>Keskin hatlara sahip kılıçlar, neon detaylı araçlar ve hızlı blok koyma görünümü.</p>
+                    <div class="card-footer">
+                        <span class="rating">★ 4.9</span>
+                        <button onclick="openModal('amethystModal')" class="btn-glow">İncele & İndir ⚡</button>
+                    </div>
                 </div>
             </div>
 
-            <!-- Kart 8 -->
+            <!-- KART 8: SPECULAR -->
             <div class="card">
-                <div class="card-badge">HD Bedwars</div>
-                <h3>Specular 32x</h3>
-                <p>Parlak ve net renkler, yüksek çözünürlüklü kaplamalar ve mükemmel alan görüşü.</p>
-                <div class="card-footer">
-                    <span>★ 4.7</span>
-                    <a href="#" class="btn-sm">İndir</a>
+                <div class="card-img-container">
+                    <img src="https://images.unsplash.com/photo-1534447677768-be436bb09401?w=600&auto=format&fit=crop" class="card-img" alt="Specular 32x">
+                    <span class="card-badge">HD Bedwars</span>
+                </div>
+                <div class="card-content">
+                    <h3>Specular 32x</h3>
+                    <p>Parlak ve net renkler, yüksek çözünürlüklü kaplamalar ve mükemmel alan görüşü.</p>
+                    <div class="card-footer">
+                        <span class="rating">★ 4.7</span>
+                        <button onclick="openModal('amethystModal')" class="btn-glow">İncele & İndir ⚡</button>
+                    </div>
                 </div>
             </div>
 
-            <!-- Kart 9 -->
+            <!-- KART 9: EUM3 LIGHT -->
             <div class="card">
-                <div class="card-badge">PvP Classic</div>
-                <h3>Eum3 Light 16x</h3>
-                <p>Yıllardır tüm PvP oyuncularının kullandığı, vuruş hissi yüksek klasik paket.</p>
-                <div class="card-footer">
-                    <span>★ 4.9</span>
-                    <a href="#" class="btn-sm">İndir</a>
+                <div class="card-img-container">
+                    <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?w=600&auto=format&fit=crop" class="card-img" alt="Eum3 Light">
+                    <span class="card-badge">PvP Classic</span>
+                </div>
+                <div class="card-content">
+                    <h3>Eum3 Light 16x</h3>
+                    <p>Yıllardır tüm PvP oyuncularının kullandığı, vuruş hissi yüksek klasik efsane paket.</p>
+                    <div class="card-footer">
+                        <span class="rating">★ 4.9</span>
+                        <button onclick="openModal('amethystModal')" class="btn-glow">İncele & İndir ⚡</button>
+                    </div>
                 </div>
             </div>
 
-            <!-- Kart 10 -->
+            <!-- KART 10: LUVIE 16x -->
             <div class="card">
-                <div class="card-badge">Pastel PvP</div>
-                <h3>Luvie 16x</h3>
-                <p>Yumuşak renk tonları, şık yatak kırma partikülleri ve son derece akıcı animasyonlar.</p>
-                <div class="card-footer">
-                    <span>★ 4.8</span>
-                    <a href="#" class="btn-sm">İndir</a>
+                <div class="card-img-container">
+                    <img src="https://images.unsplash.com/photo-1518709268805-4e9042af9f23?w=600&auto=format&fit=crop" class="card-img" alt="Luvie 16x">
+                    <span class="card-badge">Pastel PvP</span>
+                </div>
+                <div class="card-content">
+                    <h3>Luvie 16x</h3>
+                    <p>Yumuşak renk tonları, şık yatak kırma partikülleri ve son derece akıcı animasyonlar.</p>
+                    <div class="card-footer">
+                        <span class="rating">★ 4.8</span>
+                        <button onclick="openModal('amethystModal')" class="btn-glow">İncele & İndir ⚡</button>
+                    </div>
                 </div>
             </div>
 
         </div>
     </main>
 
+    <!-- DETAY SAYFASI VE OYUN İÇİ FOTOĞRAFLAR MODALI -->
+    <div id="amethystModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('amethystModal')">&times;</span>
+            <div class="modal-header">
+                <div>
+                    <h2 style="font-size: 1.8rem; margin-bottom: 5px;">Amethyst 32x Bedwars Pack</h2>
+                    <p style="color: #94a3b8;">Mor kristal temalı, kısa kılıçlı ve yüksek FPS odaklı PvP paketi.</p>
+                </div>
+                <a href="https://www.mediafire.com" target="_blank" class="btn-glow" style="padding: 12px 24px; font-size: 1rem;">
+                    ⚡ Paketi İndir (.zip)
+                </a>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <div class="info-box">
+                        <div class="gallery-title">Oyun İçi Ekran Görüntüleri (In-Game Preview)</div>
+                        <div class="gallery-grid">
+                            <img src="https://images.unsplash.com/photo-1627856013091-fed6e4e30025?w=600&auto=format&fit=crop" alt="Oyun İçi Kılıçlar">
+                            <img src="https://images.unsplash.com/photo-1550745165-9bc0b252726f?w=600&auto=format&fit=crop" alt="Oyun İçi Gökyüzü">
+                            <img src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=600&auto=format&fit=crop" alt="Oyun İçi Bloklar">
+                        </div>
+                    </div>
+                    <div class="info-box">
+                        <h4>Paket Özellikleri ve Detaylar</h4>
+                        <ul style="padding-left: 20px; color: #cbd5e1; line-height: 1.8;">
+                            <li><strong>Kısa Kılıç Tasarımı:</strong> Rakiplerinizle savaşırken ekranı kapatmaz.</li>
+                            <li><strong>Özel Gece Gökyüzü:</strong> Yıldızlı mor galaksi temalı dinlendirici gökyüzü.</li>
+                            <li><strong>Şeffaf Envanter:</strong> Sandık ve envanter açıkken etrafı izleyebilirsiniz.</li>
+                            <li><strong>FPS Boost:</strong> Düşük sistemlerde bile yüksek kare hızı sunar.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-box">
+                        <h4>İçerik Bilgileri</h4>
+                        <ul class="info-list">
+                            <li><span>Yapımcı:</span> <strong>VOİDCRAFT</strong></li>
+                            <li><span>Çözünürlük:</span> <strong>32x32</strong></li>
+                            <li><span>Minecraft Sürümü:</span> <strong>1.8.9 / 1.20+</strong></li>
+                            <li><span>Dosya Boyutu:</span> <strong>14.2 MB</strong></li>
+                            <li><span>Toplam İndirme:</span> <strong>2,150+</strong></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <footer>
-        <p>&copy; 2026 VoidCraft Atölye. Tüm hakları saklıdır.</p>
+        <p>&copy; 2026 VOİDCRAFT Atölye. Tüm hakları saklıdır.</p>
     </footer>
+
+    <script>
+        function openModal(id) {
+            document.getElementById('amethystModal').style.display = 'block';
+        }
+        function closeModal(id) {
+            document.getElementById(id).style.display = 'none';
+        }
+        window.onclick = function(event) {
+            const modal = document.getElementById('amethystModal');
+            if (event.target == modal) { modal.style.display = 'none'; }
+        }
+    </script>
 </body>
 </html>
