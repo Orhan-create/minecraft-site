@@ -10,8 +10,8 @@
         
         body {
             font-family: 'Plus Jakarta Sans', sans-serif;
-            background: linear-gradient(180deg, rgba(8, 10, 24, 0.85) 0%, rgba(5, 6, 15, 0.95) 100%),
-                        url('https://pvprp.com/assets/packs/TwoClutch/496/banner.png?v=1629472103') center/cover fixed no-repeat;
+            background: linear-gradient(180deg, rgba(8, 10, 24, 0.75) 0%, rgba(5, 6, 15, 0.92) 100%),
+                        url('https://i.redd.it/39v86p4mre9d1.png') center/cover fixed no-repeat;
             color: #f1f5f9;
             min-height: 100vh;
         }
@@ -246,6 +246,34 @@
 
         .gallery-title { font-size: 1.05rem; color: #c084fc; margin-bottom: 12px; font-weight: 700; }
 
+        .item-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(70px, 1fr));
+            gap: 12px;
+            background: rgba(10, 12, 26, 0.6);
+            padding: 15px;
+            border-radius: 12px;
+            border: 1px solid rgba(168, 85, 247, 0.2);
+        }
+
+        .item-card {
+            background: rgba(20, 22, 48, 0.8);
+            border: 1px solid rgba(192, 132, 252, 0.2);
+            border-radius: 8px;
+            padding: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 70px;
+        }
+
+        .item-card img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            image-rendering: pixelated;
+        }
+
         .banner-preview {
             width: 100%;
             border-radius: 12px;
@@ -314,7 +342,7 @@
             <!-- KART 2: PURPLED 16x -->
             <div class="card">
                 <div class="card-img-container">
-                    <img src="https://pvprp.com/assets/packs/TwoClutch/496/banner.png?v=1629472103" class="card-img" alt="Purpled 16x Banner">
+                    <img src="https://media.forgecdn.net/attachments/270/758/diamond_sword.png" class="card-img" alt="Purpled 16x Diamond Sword" style="object-fit: contain; padding: 20px; background: #0a0c1a;">
                     <span class="card-badge">Bedwars 16x</span>
                 </div>
                 <div class="card-content">
@@ -322,7 +350,7 @@
                     <p>Ünlü yayıncı Purpled özel paketi. Sade, akıcı ve maksimum PvP performansı.</p>
                     <div class="card-footer">
                         <span class="rating">★ 4.9</span>
-                        <button onclick="openModal('amethystModal')" class="btn-glow">İncele & İndir ⚡</button>
+                        <button onclick="openModal('purpledModal')" class="btn-glow">İncele & İndir ⚡</button>
                     </div>
                 </div>
             </div>
@@ -439,20 +467,83 @@
         </div>
     </div>
 
+    <!-- PURPLED 16x DETAY MODALI -->
+    <div id="purpledModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal('purpledModal')">&times;</span>
+            <div class="modal-header">
+                <div>
+                    <h2 style="font-size: 1.8rem; margin-bottom: 5px;">Purpled 16x Bedwars Pack</h2>
+                    <p style="color: #94a3b8;">Purpled Tarafından Tasarlanmış Özel Dokular ve İtemler</p>
+                </div>
+                <a href="https://www.curseforge.com/minecraft/texture-packs/purpled-pack-16x" target="_blank" class="btn-glow" style="padding: 12px 24px; font-size: 1rem;">
+                    ⚡ Paketi İndir (.zip)
+                </a>
+            </div>
+            <div class="modal-body">
+                <div>
+                    <div class="info-box">
+                        <div class="gallery-title">Paket İtem Galeri Öğeleri</div>
+                        <div class="item-grid">
+                            <div class="item-card" title="Elmas Kılıç"><img src="https://media.forgecdn.net/attachments/270/758/diamond_sword.png" alt="Diamond Sword"></div>
+                            <div class="item-card" title="Demir Kılıç"><img src="https://media.forgecdn.net/attachments/270/759/iron_sword.png" alt="Iron Sword"></div>
+                            <div class="item-card" title="Taş Kılıç"><img src="https://media.forgecdn.net/attachments/270/760/stone_sword.png" alt="Stone Sword"></div>
+                            <div class="item-card" title="Altın Kılıç"><img src="https://media.forgecdn.net/attachments/270/761/gold_sword.png" alt="Gold Sword"></div>
+                            <div class="item-card" title="Tahta Kılıç"><img src="https://media.forgecdn.net/attachments/270/762/wood_sword.png" alt="Wood Sword"></div>
+                            <div class="item-card" title="Altın Elma"><img src="https://media.forgecdn.net/attachments/270/771/apple_golden.png" alt="Golden Apple"></div>
+                            <div class="item-card" title="Olta"><img src="https://media.forgecdn.net/attachments/270/763/fishing_rod_uncast.png" alt="Fishing Rod"></div>
+                            <div class="item-card" title="Çakmak"><img src="https://media.forgecdn.net/attachments/270/768/flint_and_steel.png" alt="Flint and Steel"></div>
+                            <div class="item-card" title="Su Kovası"><img src="https://media.forgecdn.net/attachments/270/769/bucket_water.png" alt="Water Bucket"></div>
+                            <div class="item-card" title="Lav Kovası"><img src="https://media.forgecdn.net/attachments/270/770/bucket_lava.png" alt="Lava Bucket"></div>
+                            <div class="item-card" title="Yay"><img src="https://media.forgecdn.net/attachments/270/767/bow_standby.png" alt="Bow Standby"></div>
+                            <div class="item-card" title="Yay Çekme 0"><img src="https://media.forgecdn.net/attachments/270/764/bow_pulling_0.png" alt="Bow Pulling 0"></div>
+                            <div class="item-card" title="Yay Çekme 1"><img src="https://media.forgecdn.net/attachments/270/765/bow_pulling_1.png" alt="Bow Pulling 1"></div>
+                            <div class="item-card" title="Yay Çekme 2"><img src="https://media.forgecdn.net/attachments/270/766/bow_pulling_2.png" alt="Bow Pulling 2"></div>
+                            <div class="item-card" title="Partiküller"><img src="https://media.forgecdn.net/attachments/270/772/particles.png" alt="Particles"></div>
+                            <div class="item-card" title="Arayüz Barları"><img src="https://media.forgecdn.net/attachments/270/773/icons.png" alt="Icons"></div>
+                            <div class="item-card" title="Hotbar Widget"><img src="https://media.forgecdn.net/attachments/270/774/widgets.png" alt="Widgets"></div>
+                        </div>
+                    </div>
+                    <div class="info-box">
+                        <h4>Paket Özellikleri</h4>
+                        <ul style="padding-left: 20px; color: #cbd5e1; line-height: 1.8;">
+                            <li><strong>Özel İtem Dokuları:</strong> Kılıçlar, yaylar ve oltalar özel 16x çözünürlükte tasarlanmıştır.</li>
+                            <li><strong>Sade Arayüz:</strong> Sıcak çubuk (hotbar) ve envanter pencereleri sadeleştirilmiştir.</li>
+                            <li><strong>PvP Odaklı:</strong> Görüş alanını kapatmayan kısa ve net silah tasarımları.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    <div class="info-box">
+                        <h4>Paket Detayları</h4>
+                        <ul class="info-list">
+                            <li><span>Yapımcı:</span> <strong>Purpled</strong></li>
+                            <li><span>Çözünürlük:</span> <strong>16x16</strong></li>
+                            <li><span>Sürüm:</span> <strong>Minecraft 1.8.9</strong></li>
+                            <li><span>Türü:</span> <strong>Bedwars / PvP Edit</strong></li>
+                            <li><span>Puan:</span> <strong>★ 4.9 / 5</strong></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <footer>
         <p>&copy; 2026 VOİDCRAFT Atölye. Tüm hakları saklıdır.</p>
     </footer>
 
     <script>
         function openModal(id) {
-            document.getElementById('amethystModal').style.display = 'block';
+            document.getElementById(id).style.display = 'block';
         }
         function closeModal(id) {
             document.getElementById(id).style.display = 'none';
         }
         window.onclick = function(event) {
-            const modal = document.getElementById('amethystModal');
-            if (event.target == modal) { modal.style.display = 'none'; }
+            if (event.target.classList.contains('modal')) { 
+                event.target.style.display = 'none'; 
+            }
         }
     </script>
 </body>
